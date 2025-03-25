@@ -144,21 +144,23 @@ async def put_spending_view(
 
 
 @router.get("/{id:int}")
-async def get_spending_by_id_view(id: int, session: AsyncSession, user: User = Depends(login)) -> ReturnSpendingScheme:
+async def get_spending_by_id_view(
+    id: int, session: AsyncSession = Depends(db_helper.get_session), user: User = Depends(login)
+) -> ReturnSpendingScheme:
     """
-        Получает запись о расходе по указанному ID, если она принадлежит текущему пользователю.
+    Получает запись о расходе по указанному ID, если она принадлежит текущему пользователю.
 
-        Args:
-            id (int): Идентификатор расхода.
-            session (AsyncSession): Сессия базы данных.
-            user (User): Авторизованный пользователь.
+    Args:
+        id (int): Идентификатор расхода.
+        session (AsyncSession): Сессия базы данных.
+        user (User): Авторизованный пользователь.
 
-        Returns:
-            Spending: Запись о расходе.
+    Returns:
+        Spending: Запись о расходе.
 
-        Raises:
-            HTTPException: Если запись не найдена или не принадлежит пользователю.
-        """
+    Raises:
+        HTTPException: Если запись не найдена или не принадлежит пользователю.
+    """
     spending = await get_spending_by_id(session=session, id=id)
     if spending is not None and user.id == spending.user_id:
         return spending
