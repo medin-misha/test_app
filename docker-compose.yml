@@ -29,3 +29,10 @@ services:
     restart: unless-stopped
     tty: true
     stdin_open: true
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    ports:
+      - 8001:8000
