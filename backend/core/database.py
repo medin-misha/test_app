@@ -2,7 +2,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sess
 from core.settings import settings
 
 
-class DBHelper():
+class DBHelper:
     def __init__(self, url: str) -> None:
         self.engine = create_async_engine(url=url)
         self.session_maker = async_sessionmaker(

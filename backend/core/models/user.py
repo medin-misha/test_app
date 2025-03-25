@@ -9,5 +9,6 @@ if TYPE_CHECKING:
 class User(Base):
     chat_id: Mapped[str] = mapped_column(unique=True)
     spendings: Mapped[List["Spending"]] = relationship(
-        backref="user", uselist=True, lazy="selectin"
+        back_populates="user",
+        uselist=True,
     )
