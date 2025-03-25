@@ -36,3 +36,8 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - 8001:8000
+
+  telegrambot:
+    build:
+      context: ./telegrambot
+      dockerfile: ./Dockerfile
