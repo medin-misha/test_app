@@ -18,6 +18,6 @@ async def login(
     user = await get_user_by_chat_id(session=session, chat_id=chat_id)
     if user is None:
         raise HTTPException(
-            status=status.HTTP_401_UNAUTHORIZED, detail="user not found!"
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="user not found!"
         )
     return user

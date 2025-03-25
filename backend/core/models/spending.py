@@ -12,4 +12,4 @@ class Spending(Base):
     money: Mapped[int] = mapped_column(nullable=False)
     date: Mapped[str] = mapped_column(Date, nullable=False)
     user_id: Mapped[int] = mapped_column(ForeignKey("user.id"))
-    user: Mapped["User"] = relationship(back_populates="spendings", lazy="selectin")
+    user: Mapped["User"] = relationship(back_populates="spendings")
