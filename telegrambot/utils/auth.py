@@ -13,4 +13,3 @@ async def registration(user_id: int) -> int:
             url=settings.backend_url + "api/users", json=data
         ) as response:
             return response.status
-

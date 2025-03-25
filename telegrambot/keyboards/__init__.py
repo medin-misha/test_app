@@ -1,4 +1,4 @@
-__all__ = ("replays")
+__all__ = "replays"
 
 from .reply_keyboards import ReplaysKeyboards
 

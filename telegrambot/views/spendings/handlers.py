@@ -16,7 +16,6 @@ from .utils import valid_date, format_date, send_monthly_report
 router = Router(name="spending_router")
 
 
-
 @router.message(Command("createSpending"), StateFilter("*"))
 async def create_spending_handler(msg: Message, state: FSMContext):
     await msg.bot.send_chat_action(action=ChatAction.TYPING, chat_id=msg.chat.id)
@@ -54,6 +53,7 @@ async def delete_spendings_handler(msg: Message, state: FSMContext):
     await send_monthly_report(msg=msg)
     await msg.reply(text="Для удаления записи мне нужен её ID")
     await state.set_state(DeleteSpendings.get_id)
+
 
 # create spending states
 @router.message(CreateSpending.name, F.text)

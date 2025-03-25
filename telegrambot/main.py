@@ -9,12 +9,15 @@ from views import main_router
 
 async def main() -> None:
     logging.basicConfig(level=logging.DEBUG)
-    bot = Bot(token=settings.token, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+    bot = Bot(
+        token=settings.token, default=DefaultBotProperties(parse_mode=ParseMode.HTML)
+    )
     dp = Dispatcher()
 
     dp.include_router(main_router)
 
     await dp.start_polling(bot)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     asyncio.run(main())
