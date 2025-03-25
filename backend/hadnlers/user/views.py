@@ -1,8 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import HTTPBasicCredentials
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
-from core import User, db_helper, get_user_by_chat_id, login
+from core import User, db_helper, get_user_by_chat_id
 from .schemes import UserScheme, ReturnUser
 from .utils import get_users
 
