@@ -143,6 +143,28 @@ async def put_spending_view(
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Не найдено!")
 
 
+@router.get("/{id:int}")
+async def get_spending_by_id_view(id: int, session: AsyncSession, user: User = Depends(login)) -> ReturnSpendingScheme:
+    """
+        Получает запись о расходе по указанному ID, если она принадлежит текущему пользователю.
+
+        Args:
+            id (int): Идентификатор расхода.
+            session (AsyncSession): Сессия базы данных.
+            user (User): Авторизованный пользователь.
+
+        Returns:
+            Spending: Запись о расходе.
+
+        Raises:
+            HTTPException: Если запись не найдена или не принадлежит пользователю.
+        """
+    spending = await get_spending_by_id(session=session, id=id)
+    if spending is not None and user.id == spending.user_id:
+        return spending
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Не найдено!")
+
+
 @router.delete("/{id:int}", status_code=204)
 async def delete_spending(
     id: int,
